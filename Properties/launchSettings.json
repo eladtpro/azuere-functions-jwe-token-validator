@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "azuere_functions_jwe_token_validator": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7177",
+      "launchBrowser": false
+    }
+  }
+}
