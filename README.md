@@ -1,4 +1,4 @@
-![AKS Scaling](assets/jwe_triangle.webp)
+![AKS Scaling](assets/jwe.webp)
 
 
 # JSON Web Encryption (JWE) token validator
