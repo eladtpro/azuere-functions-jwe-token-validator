@@ -11,6 +11,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Linq;
+
 namespace Microsoft.Function;
 
 public static class JWETokenGenerator
@@ -20,7 +22,7 @@ public static class JWETokenGenerator
 
     [OpenApiOperation(operationId: "Run")]
     [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-    [OpenApiRequestBody("application/json", typeof(string), Description = "JSON request body containing { hours, capacity}")]
+    [OpenApiRequestBody("application/json", typeof(JObject), Description = "JSON request body containing { hours, capacity}")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string),Description = "The OK response message containing a JSON result.")]
     public static IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req, ILogger log)
