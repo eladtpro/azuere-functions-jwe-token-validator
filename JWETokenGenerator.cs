@@ -16,8 +16,7 @@ public static class JWETokenGenerator
     public static IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req, ILogger log)
     {
-        bool plain = req.Query.ContainsKey("plain");
-        log.LogInformation($"C# HTTP trigger function processed a request. plain: {plain}");
+        log.LogInformation($"C# HTTP trigger function processed a request");
         var tokenHandler = new JsonWebTokenHandler();
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -27,14 +26,10 @@ public static class JWETokenGenerator
                 .Where(q => !string.Equals(q.Key, "code", StringComparison.OrdinalIgnoreCase))
                 .ToDictionary(q => q.Key, q => (object)q.Value),
 
-            Expires = DateTime.UtcNow.AddDays(7)
+            Expires = DateTime.UtcNow.AddDays(1),
+            SigningCredentials = new SigningCredentials(Config.SigningKey, SecurityAlgorithms.HmacSha256Signature),
+            EncryptingCredentials = new EncryptingCredentials(Config.EncryptionKey, SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256)
         };
-
-        if (!plain)
-        {
-            tokenDescriptor.SigningCredentials = new SigningCredentials(Config.SigningKey, SecurityAlgorithms.HmacSha256Signature);
-            tokenDescriptor.EncryptingCredentials = new EncryptingCredentials(Config.EncryptionKey, SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
-        }
 
         string token = tokenHandler.CreateToken(tokenDescriptor);
 

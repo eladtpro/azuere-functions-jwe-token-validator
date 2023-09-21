@@ -20,18 +20,22 @@ public static class JWETokenValidator
     {
         log.LogInformation("C# HTTP trigger function processed a request.");
 
+        // extract token from input
         string token = req.Query["token"];
         string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
         dynamic data = JsonConvert.DeserializeObject(requestBody);
         token = token ?? data?.token;
+        // if the token not found in the input - try the header
         token = token ?? (req.Headers.TryGetValue("Authorization", out var authHeaderValues) ?
             authHeaderValues[0].Replace("Bearer ", ""): null);
 
         if(string.IsNullOrEmpty(token))
             return new BadRequestResult();
 
+
         JsonWebTokenHandler handler = new JsonWebTokenHandler();
-        TokenValidationResult result = handler.ValidateToken(token, new TokenValidationParameters
+        TokenValidationResult result = handler.ValidateToken(token,
+            new TokenValidationParameters
         {
             ValidateAudience = false,
             ValidateIssuer = false,
