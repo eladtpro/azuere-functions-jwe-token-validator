@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Microsoft.Function;
+namespace MyNamespace;
 public static class Config
 {
 	public static SecurityKey SigningKey =>

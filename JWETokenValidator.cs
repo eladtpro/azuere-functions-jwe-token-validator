@@ -15,13 +15,12 @@ using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using System.Net;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.Function;
+namespace MyNamespace;
 public static class JWETokenValidator
 {
     [FunctionName(nameof(JWETokenValidator))]
-
     [OpenApiOperation(operationId: "Run")]
-    [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
+    //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
     [OpenApiRequestBody("application/json", typeof(JObject), Description = "JSON request body containing { hours, capacity}")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "The OK response message containing a JSON result.")]
     public static async Task<IActionResult> Run(
@@ -44,7 +43,7 @@ public static class JWETokenValidator
 
 
         JsonWebTokenHandler handler = new JsonWebTokenHandler();
-        TokenValidationResult result = handler.ValidateToken(token,
+        TokenValidationResult result = await handler.ValidateTokenAsync(token,
             new TokenValidationParameters
         {
             ValidateAudience = false,
