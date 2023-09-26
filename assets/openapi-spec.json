@@ -5,7 +5,7 @@
         "description": "This is the OpenAPI Document on Azure Functions",
         "version": "1.0.0"
     },
-    "host": "localhost:7071",
+    "host": "func-apim-jwe.azurewebsites.net",
     "basePath": "/api",
     "schemes": [
         "http"
