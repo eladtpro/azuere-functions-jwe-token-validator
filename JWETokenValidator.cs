@@ -17,7 +17,7 @@ namespace MyNamespace;
 public static class JWETokenValidator
 {
     [FunctionName(nameof(JWETokenValidator))]
-    [OpenApiOperation(operationId: "JWETokenGenerator")]
+    [OpenApiOperation(operationId: "JWETokenValidator")]
     //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
     [OpenApiRequestBody("application/text", typeof(string), Description = "JSON Web Encryption (JWE) in plain text")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "The OK response message containing a JSON result.")]

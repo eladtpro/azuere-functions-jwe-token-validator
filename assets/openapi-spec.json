@@ -1,0 +1,68 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "OpenAPI Document on Azure Functions",
+        "description": "This is the OpenAPI Document on Azure Functions",
+        "version": "1.0.0"
+    },
+    "host": "localhost:7071",
+    "basePath": "/api",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/JWETokenGenerator": {
+            "get": {
+                "operationId": "JWETokenGenerator",
+                "produces": [
+                    "application/text"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "sub",
+                        "description": "The subject of the token, e.g. user@domain.org",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The OK response message containing a JSON result.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/JWETokenValidator": {
+            "post": {
+                "operationId": "JWETokenValidator",
+                "consumes": [
+                    "application/text"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "JSON Web Encryption (JWE) in plain text",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The OK response message containing a JSON result.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
