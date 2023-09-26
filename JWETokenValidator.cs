@@ -8,18 +8,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.OpenApi.Models;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using System.Net;
-using Newtonsoft.Json.Linq;
 
 namespace MyNamespace;
 public static class JWETokenValidator
 {
     [FunctionName(nameof(JWETokenValidator))]
-    [OpenApiOperation(operationId: "Run")]
+    [OpenApiOperation(operationId: "JWETokenGenerator")]
     //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
     [OpenApiRequestBody("application/text", typeof(string), Description = "JSON Web Encryption (JWE) in plain text")]
     [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "The OK response message containing a JSON result.")]
