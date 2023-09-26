@@ -20,9 +20,8 @@ public static class JWETokenGenerator
     [FunctionName(nameof(JWETokenGenerator))]
     [OpenApiOperation(operationId: "Run")]
     //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-    //[OpenApiRequestBody("application/json", typeof(JObject), Description = "JSON request body containing { hours, capacity}")]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string),Description = "The OK response message containing a JSON result.")]
-    [OpenApiParameter("sub", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The subject of the token")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "The OK response message containing a JSON result.")]
+    [OpenApiParameter("sub", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The subject of the token sub=elsa")]
     public static IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req, ILogger log)
     {
@@ -30,15 +29,19 @@ public static class JWETokenGenerator
         var tokenHandler = new JsonWebTokenHandler();
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Audience = Config.Audience,
-            Issuer = Config.Issuer,
+            Audience = Config.Current.Audience,
+            Issuer = Config.Current.Issuer,
             Claims = req.Query
                 .Where(q => !string.Equals(q.Key, "code", StringComparison.OrdinalIgnoreCase))
                 .ToDictionary(q => q.Key, q => (object)q.Value),
 
             Expires = DateTime.UtcNow.AddDays(1),
-            SigningCredentials = new SigningCredentials(Config.SigningKey, SecurityAlgorithms.HmacSha256Signature),
-            EncryptingCredentials = new EncryptingCredentials(Config.EncryptionKey, SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256)
+
+            // private key for signing
+            SigningCredentials = new SigningCredentials(Config.Current.PrivateSigningKey, SecurityAlgorithms.EcdsaSha256),
+
+            // public key for encryption
+            EncryptingCredentials = new EncryptingCredentials(Config.Current.PublicEncryptionKey, SecurityAlgorithms.RsaOAEP, SecurityAlgorithms.Aes256CbcHmacSha512)
         };
 
         string token = tokenHandler.CreateToken(tokenDescriptor);
