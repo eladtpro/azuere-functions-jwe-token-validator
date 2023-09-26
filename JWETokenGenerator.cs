@@ -11,7 +11,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Linq;
 
 namespace MyNamespace;
 
@@ -20,8 +19,8 @@ public static class JWETokenGenerator
     [FunctionName(nameof(JWETokenGenerator))]
     [OpenApiOperation(operationId: "JWETokenGenerator")]
     //[OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "code", In = OpenApiSecurityLocationType.Query)]
-    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(string), Description = "The OK response message containing a JSON result.")]
-    [OpenApiParameter("sub", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The subject of the token sub=elsa")]
+    [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/text", bodyType: typeof(string), Description = "The OK response message containing a JSON result.")]
+    [OpenApiParameter("sub", In = ParameterLocation.Query, Required = false, Type = typeof(string), Description = "The subject of the token, e.g. user@domain.org")]
     public static IActionResult Run(
         [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req, ILogger log)
     {
