@@ -18,6 +18,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Azure.WebJobs.Extensions.Kusto" Version="1.0.9-Preview" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

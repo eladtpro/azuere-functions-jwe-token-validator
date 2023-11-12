@@ -1,7 +1,23 @@
+# Azure API Management Special Policies
+# Implement logging and monitoring for Azure OpenAI models
+
+
+
+## Integrating Azure Functions with Azure Data Explorer
+
+
+.
+.
+.
+
+
+
+
+
+
+
+## JSON Web Encryption (JWE) token validator
 ![AKS Scaling](assets/jwe.webp)
-
-
-# JSON Web Encryption (JWE) token validator
 
 This is a repository containing an Azure Functions project that demonstrates how to validate JSON Web Encryption (JWE) tokens using the `JsonWebTokenHandler` class in the `System.IdentityModel.Tokens.Jwt` namespace. The project includes a sample HTTP trigger function that accepts a JWE token in the `Authorization` header of an HTTP request, validates the token, and returns a response indicating whether the token is valid or not.
 
@@ -16,7 +32,7 @@ For more information on working with JWE tokens in Azure Functions, see the [off
 
 GitHub Copilot: Sure! Here's the merged text formatted in Markdown:
 
-## JWE and JWS Tokens
+### JWE and JWS Tokens
 
 JSON Web Encryption (JWE) and JSON Web Signature (JWS) are both standards for securing data in JSON format, but they serve different purposes.
 

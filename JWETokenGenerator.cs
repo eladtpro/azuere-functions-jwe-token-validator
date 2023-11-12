@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
-using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
@@ -28,8 +27,10 @@ public static class JWETokenGenerator
         var tokenHandler = new JsonWebTokenHandler();
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Audience = Config.Current.Audience,
-            Issuer = Config.Current.Issuer,
+            // TODO: Set up federated identity credentials through Microsoft Graph
+            // https://learn.microsoft.com/en-us/graph/api/resources/federatedidentitycredentials-overview?view=graph-rest-1.0#set-up-federated-identity-credentials-through-microsoft-graph
+            Audience = Config.Current.Audience ?? "api://AzureADTokenExchange", 
+            Issuer = Config.Current.Issuer, 
             Claims = req.Query
                 .Where(q => !string.Equals(q.Key, "code", StringComparison.OrdinalIgnoreCase))
                 .ToDictionary(q => q.Key, q => (object)q.Value),

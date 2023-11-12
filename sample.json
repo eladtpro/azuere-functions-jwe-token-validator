@@ -1,0 +1,137 @@
+{
+    "id": "chatcmpl-8K2eSDEjPLh804xMOzuXaSVslHhhx",
+    "object": "chat.completion",
+    "created": 1699787444,
+    "model": "gpt-35-turbo",
+    "prompt_filter_results": [
+        {
+            "prompt_index": 0,
+            "content_filter_results": {
+                "hate": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "self_harm": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "sexual": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "violence": {
+                    "filtered": false,
+                    "severity": "safe"
+                }
+            }
+        }
+    ],
+    "choices": [
+        {
+            "index": 0,
+            "finish_reason": "length",
+            "message": {
+                "role": "assistant",
+                "content": "As an AI language model"
+            },
+            "content_filter_results": {
+                "hate": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "self_harm": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "sexual": {
+                    "filtered": false,
+                    "severity": "safe"
+                },
+                "violence": {
+                    "filtered": false,
+                    "severity": "safe"
+                }
+            }
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 13,
+        "completion_tokens": 5,
+        "total_tokens": 18
+    },
+    "subcription": {
+        "Publisher": {
+            "StorageId": 0,
+            "Id": "apim-sweden.azure-api.net",
+            "RevisionId": "apim-sweden.azure-api.net.1",
+            "SystemPolicy": {
+                "id": "policy",
+                "revision": 1,
+                "omit-in-snapshot": true
+            },
+            "Deployment": {
+                "ServiceId": "apim-sweden",
+                "Gateway": {
+                    "Id": "managed",
+                    "InstanceId": "managed",
+                    "IsManaged": true
+                },
+                "Certificates": {},
+                "ServiceName": "apim-sweden.azure-api.net",
+                "GatewayId": "managed"
+            },
+            "GlobalDiagnostics": [
+                {
+                    "id": "applicationinsights",
+                    "revision": 2425,
+                    "lastEventId": 6
+                },
+                {
+                    "id": "azuremonitor",
+                    "revision": 8407,
+                    "lastEventId": 73
+                }
+            ]
+        },
+        "Api": {
+            "id": "open-ai;rev=1",
+            "revision": 8027,
+            "lastEventId": 232
+        },
+        "Operation": {
+            "id": "post-query",
+            "revision": 8322,
+            "lastEventId": 180
+        },
+        "Subscription": {
+            "id": "User1",
+            "revision": 8030,
+            "lastEventId": 279
+        },
+        "User": {
+            "id": "1",
+            "revision": 1
+        },
+        "Product": null,
+        "BackendServiceUrl": null,
+        "Deployment": {
+            "ServiceId": "apim-sweden",
+            "Gateway": {
+                "Id": "managed",
+                "InstanceId": "managed",
+                "IsManaged": true
+            },
+            "Certificates": {},
+            "ServiceName": "apim-sweden.azure-api.net",
+            "GatewayId": "managed"
+        },
+        "Backend": {
+            "id": "openaione1",
+            "revision": 10254,
+            "lastEventId": 230
+        },
+        "BufferManager": {},
+        "Authorized": true,
+        "IsConfiguredCompletely": true
+    }
+}
